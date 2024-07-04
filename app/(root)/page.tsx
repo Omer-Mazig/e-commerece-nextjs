@@ -1,9 +1,11 @@
-import { UserButton } from "@clerk/nextjs";
+"use client";
 
-export default function RootPage() {
+import { Modal } from "@/components/ui/modal";
+
+export default function SetupPage() {
   return (
     <div className="p-4">
-      <UserButton />
+      <Modal isOpen onClose={() => {}} title="text" description="test2"></Modal>
     </div>
   );
 }

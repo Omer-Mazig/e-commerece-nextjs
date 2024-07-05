@@ -2,7 +2,7 @@ import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
-import { SettingsForm } from "./_components/settings-from";
+import { SettingsForm } from "./_components/settings-form";
 
 interface SettingsPageProps {
   params: {
@@ -23,11 +23,5 @@ export default async function SettingsPage({ params }: SettingsPageProps) {
 
   if (!store) redirect("/");
 
-  return (
-    <div className="flex flex-col">
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <SettingsForm initialData={store} />
-      </div>
-    </div>
-  );
+  return <SettingsForm initialData={store} />;
 }

@@ -18,14 +18,16 @@ export const MainNav = ({
       href: `/${params.storeId}`,
       label: "Overview",
       active: pathname === `/${params.storeId}`,
-      icon: <Dock className="w-4 h-4" />,
+    },
+    {
+      href: `/${params.storeId}/billboards`,
+      label: "Billboards",
+      active: pathname === `/${params.storeId}/billboards`,
     },
     {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
-
-      icon: <Settings2 className="w-4 h-4" />,
     },
   ];
 
@@ -43,7 +45,6 @@ export const MainNav = ({
                 : "text-muted-foreground"
             )}
           >
-            {route.icon}
             {route.label}
           </Link>
         );

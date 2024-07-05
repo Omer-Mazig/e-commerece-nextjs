@@ -12,5 +12,6 @@ export const useOrigin = () => {
     setIsMounted(true);
   }, []);
 
-  if (!isMounted) return null;
+  if (!isMounted) return "";
+  return origin;
 };

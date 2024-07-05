@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { useStoreModal } from "@/hooks/use-store-modal";
 
+// THIS PAGE IS ONLY FOR TRIGGERING THE MODAL IF NO THERE ARE NO STORES
 export default function SetupPage() {
   const isOpen = useStoreModal(state => state.isOpen);
   const onOpen = useStoreModal(state => state.onOpen);
@@ -14,5 +15,5 @@ export default function SetupPage() {
     }
   }, [isOpen, onOpen]);
 
-  return <div className="p-4">Root</div>;
+  return null;
 }

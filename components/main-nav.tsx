@@ -4,7 +4,7 @@ import { useParams, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Settings2 } from "lucide-react";
+import { Dock, Settings2 } from "lucide-react";
 
 export const MainNav = ({
   className,
@@ -15,9 +15,16 @@ export const MainNav = ({
 
   const routes = [
     {
+      href: `/${params.storeId}`,
+      label: "Overview",
+      active: pathname === `/${params.storeId}`,
+      icon: <Dock className="w-4 h-4" />,
+    },
+    {
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
+
       icon: <Settings2 className="w-4 h-4" />,
     },
   ];

@@ -1,3 +1,4 @@
+import { MainHeader } from "@/components/main-header";
 import prismadb from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
@@ -25,7 +26,7 @@ export default async function DashboardLayout({
 
   return (
     <>
-      <div>This will be a navbar</div>
+      <MainHeader />
       {children}
     </>
   );

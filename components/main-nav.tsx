@@ -4,6 +4,7 @@ import { useParams, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { Settings2 } from "lucide-react";
 
 export const MainNav = ({
   className,
@@ -17,6 +18,7 @@ export const MainNav = ({
       href: `/${params.storeId}/settings`,
       label: "Settings",
       active: pathname === `/${params.storeId}/settings`,
+      icon: <Settings2 className="w-4 h-4" />,
     },
   ];
 
@@ -28,12 +30,13 @@ export const MainNav = ({
             key={route.href}
             href={route.href}
             className={cn(
-              "text-sm font-medium transition-colors hover:text-primary",
+              "text-sm font-medium transition-colors hover:text-primary flex items-center gap-1",
               route.active
                 ? "text-black dark:text-white"
                 : "text-muted-foreground"
             )}
           >
+            {route.icon}
             {route.label}
           </Link>
         );

@@ -85,7 +85,7 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
       await axios.delete(
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
-      router.refresh(); // ?
+      router.push(`/${params.storeId}/billboards`);
       toast.success("Billboard Deleted!");
     } catch {
       toast.error("Make sure you removed categories using this billboard.");
@@ -169,7 +169,6 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
           </Button>
         </form>
       </Form>
-      <Separator />
     </>
   );
 };

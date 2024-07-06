@@ -77,8 +77,8 @@ export const CategoryForm = ({
       } else {
         await axios.post(`/api/${params.storeId}/categories`, values);
       }
-      router.refresh();
       router.push(`/${params.storeId}/categories`);
+      router.refresh();
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Somthing went wrong...");

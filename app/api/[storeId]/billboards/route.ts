@@ -53,6 +53,7 @@ export async function POST(
     });
 
     if (!storeByUserId) {
+      // TODO: Add logs
       return new NextResponse("Unauthorized", { status: 403 });
     }
 

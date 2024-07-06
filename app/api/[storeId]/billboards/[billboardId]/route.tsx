@@ -56,6 +56,7 @@ export async function PATCH(
     });
 
     if (!storeByUserId) {
+      // TODO: Add logs
       return new NextResponse("Unauthorized", { status: 403 });
     }
 
@@ -98,6 +99,7 @@ export async function DELETE(
     });
 
     if (!storeByUserId) {
+      // TODO: Add logs
       return new NextResponse("Unauthorized", { status: 403 });
     }
 

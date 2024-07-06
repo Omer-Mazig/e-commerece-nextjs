@@ -10,8 +10,6 @@ import { Trash } from "lucide-react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-import { useOrigin } from "@/hooks/use-origin";
-
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Separator } from "@/components/ui/separator";
@@ -45,8 +43,6 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
   const params = useParams();
   const router = useRouter();
 
-  const origin = useOrigin();
-
   const title = initialData ? "Edit Billboard" : "Create Billboard";
   const description = initialData ? "Edit a billboard" : "Add a new billboard";
   const toastMessage = initialData
@@ -62,7 +58,7 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
     },
   });
 
-  const onUpdate = async (values: BillboardFormValues) => {
+  const onSubmit = async (values: BillboardFormValues) => {
     try {
       setLoading(true);
       if (initialData) {
@@ -124,7 +120,7 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
 
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onUpdate)}
+          onSubmit={form.handleSubmit(onSubmit)}
           className="space-y-8 w-full"
         >
           <FormField

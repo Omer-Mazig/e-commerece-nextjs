@@ -86,6 +86,7 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
         `/api/${params.storeId}/billboards/${params.billboardId}`
       );
       router.push(`/${params.storeId}/billboards`);
+      router.refresh(); // ?
       toast.success("Billboard Deleted!");
     } catch {
       toast.error("Make sure you removed categories using this billboard.");

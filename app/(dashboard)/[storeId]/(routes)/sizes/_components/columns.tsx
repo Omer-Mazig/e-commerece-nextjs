@@ -26,6 +26,7 @@ export const columns: ColumnDef<SizeClomun>[] = [
     header: "Date",
   },
   {
+    header: "Actions",
     id: "actions",
     cell: ({ row }) => <CellAction data={row.original} />,
   },

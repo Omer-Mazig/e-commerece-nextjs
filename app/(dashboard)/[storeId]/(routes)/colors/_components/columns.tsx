@@ -35,6 +35,7 @@ export const columns: ColumnDef<ColorClomun>[] = [
     header: "Date",
   },
   {
+    header: "Actions",
     id: "actions",
     cell: ({ row }) => <CellAction data={row.original} />,
   },

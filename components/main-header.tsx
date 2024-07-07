@@ -4,6 +4,7 @@ import { StoreSwitcher } from "./store-switcher";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import prismadb from "@/lib/prismadb";
+import { Separator } from "./ui/separator";
 
 export const MainHeader = async ({}) => {
   const { userId } = auth();
@@ -25,6 +26,8 @@ export const MainHeader = async ({}) => {
           <UserButton />
         </div>
       </div>
+      {/* <Separator /> */}
+      {/* <MainNav className="mx-6 my-4" /> */}
     </header>
   );
 };

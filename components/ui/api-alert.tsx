@@ -1,10 +1,10 @@
 "use client";
 
-import toast from "react-hot-toast";
 import { Copy, Server } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "./alert";
 import { Badge, BadgeProps } from "./badge";
 import { Button } from "./button";
+import { useToast } from "./use-toast";
 
 interface ApiAlertProps {
   title: string;
@@ -27,9 +27,13 @@ export const ApiAlert = ({
   description,
   variant = "public",
 }: ApiAlertProps) => {
+  const { toast } = useToast();
+
   const onCopy = () => {
     navigator.clipboard.writeText(description);
-    toast.success("Api Route copied to the clipboard.");
+    toast({
+      title: "Api Route copied to the clipboard.",
+    });
   };
   return (
     <Alert>

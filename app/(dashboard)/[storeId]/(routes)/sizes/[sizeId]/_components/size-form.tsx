@@ -7,7 +7,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Size } from "@prisma/client";
 import { Trash } from "lucide-react";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alet-modal";
+import { useToast } from "@/components/ui/use-toast";
 
 interface SizeFromProps {
   initialData: Size | null;
@@ -38,6 +38,8 @@ type SizeFromValues = z.infer<typeof formSchema>;
 export const SizeFrom = ({ initialData }: SizeFromProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { toast } = useToast();
 
   const params = useParams();
   const router = useRouter();
@@ -68,9 +70,14 @@ export const SizeFrom = ({ initialData }: SizeFromProps) => {
       }
       router.push(`/${params.storeId}/sizes`);
       router.refresh();
-      toast.success(toastMessage);
+      toast({
+        title: toastMessage,
+      });
     } catch (error) {
-      toast.error("Somthing went wrong...");
+      toast({
+        variant: "destructive",
+        title: "Somthing went wrong...",
+      });
     } finally {
       setLoading(false);
     }
@@ -82,9 +89,14 @@ export const SizeFrom = ({ initialData }: SizeFromProps) => {
       await axios.delete(`/api/${params.storeId}/sizes/${params.sizeId}`);
       router.push(`/${params.storeId}/sizes`);
       router.refresh(); // ?
-      toast.success("Size Deleted!");
+      toast({
+        title: "Size Deleted.",
+      });
     } catch {
-      toast.error("Make sure you removed product using this size.");
+      toast({
+        variant: "destructive",
+        title: "Make sure you removed product using this size.",
+      });
     } finally {
       setLoading(false);
       setOpen(false);

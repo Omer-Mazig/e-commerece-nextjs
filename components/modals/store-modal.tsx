@@ -17,7 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import toast from "react-hot-toast";
+import { useToast } from "../ui/use-toast";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -25,6 +25,8 @@ const formSchema = z.object({
 
 export const StoreModal = () => {
   const storeModal = useStoreModal();
+
+  const { toast } = useToast();
 
   const [loading, setLoading] = useState(false);
 
@@ -43,7 +45,10 @@ export const StoreModal = () => {
       // for full page refresh 👇
       window.location.assign(`/${res.data.id}`);
     } catch (error) {
-      toast.error("Somthing went wrong...");
+      toast({
+        variant: "destructive",
+        title: "Somthing went wrong...",
+      });
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Store } from "@prisma/client";
 import { Trash } from "lucide-react";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import { Button } from "@/components/ui/button";
@@ -25,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alet-modal";
 import { ApiAlert } from "@/components/ui/api-alert";
 import { useOrigin } from "@/hooks/use-origin";
+import { useToast } from "@/components/ui/use-toast";
 
 interface SettingsFormProps {
   initialData: Store;
@@ -39,6 +39,8 @@ type SettingsFormValues = z.infer<typeof formSchema>;
 export const SettingsForm = ({ initialData }: SettingsFormProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { toast } = useToast();
 
   const params = useParams();
   const router = useRouter();
@@ -55,9 +57,14 @@ export const SettingsForm = ({ initialData }: SettingsFormProps) => {
       setLoading(true);
       await axios.patch(`/api/stores/${params.storeId}`, values);
       router.refresh();
-      toast.success("Store updated!");
+      toast({
+        title: "Store updated.",
+      });
     } catch (error) {
-      toast.error("Somthing went wrong...");
+      toast({
+        variant: "destructive",
+        title: "Somthing went wrong...",
+      });
     } finally {
       setLoading(false);
     }
@@ -68,9 +75,14 @@ export const SettingsForm = ({ initialData }: SettingsFormProps) => {
       setLoading(true);
       await axios.delete(`/api/stores/${params.storeId}`);
       router.refresh(); // ?
-      toast.success("Store Deleted!");
+      toast({
+        title: "Store Deleted.",
+      });
     } catch {
-      toast.error("Make sure you removed all products and categories first.");
+      toast({
+        variant: "destructive",
+        title: "Make sure you removed all products and categories first.",
+      });
     } finally {
       setLoading(false);
       setOpen(false);

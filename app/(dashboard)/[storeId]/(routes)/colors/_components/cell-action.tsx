@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 
-import toast from "react-hot-toast";
 import axios from "axios";
 import { Copy, Edit, MoreHorizontal, Trash } from "lucide-react";
 
@@ -18,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { AlertModal } from "@/components/modals/alet-modal";
+import { useToast } from "@/components/ui/use-toast";
 
 interface CellActionProps {
   data: ColorClomun;
@@ -27,12 +27,16 @@ export const CellAction = ({ data }: CellActionProps) => {
   const params = useParams();
   const router = useRouter();
 
+  const { toast } = useToast();
+
   const [loading, setLoading] = useState(false);
   const [openAlertModal, setOpenAlertModal] = useState(false);
 
   const onCopy = (id: string) => {
     navigator.clipboard.writeText(id);
-    toast.success("Id copied to clipboard.");
+    toast({
+      title: "Id copied to clipboard.",
+    });
   };
 
   const onDelete = async () => {
@@ -40,9 +44,14 @@ export const CellAction = ({ data }: CellActionProps) => {
       setLoading(true);
       await axios.delete(`/api/${params.storeId}/colors/${data.id}`);
       router.refresh(); // ?
-      toast.success("Color Deleted!");
+      toast({
+        title: "Color Deleted.",
+      });
     } catch {
-      toast.error("Make sure you removed product using this color.");
+      toast({
+        variant: "destructive",
+        title: "Make sure you removed product using this color.",
+      });
     } finally {
       setLoading(false);
       setOpenAlertModal(false);

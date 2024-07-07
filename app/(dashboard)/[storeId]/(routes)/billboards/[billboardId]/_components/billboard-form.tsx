@@ -7,7 +7,6 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Billboard } from "@prisma/client";
 import { Trash } from "lucide-react";
-import toast from "react-hot-toast";
 import axios from "axios";
 
 import { Button } from "@/components/ui/button";
@@ -24,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { AlertModal } from "@/components/modals/alet-modal";
 import { ImageUpload } from "@/components/image-upload";
+import { useToast } from "@/components/ui/use-toast";
 
 interface BillboardFormProps {
   initialData: Billboard | null;
@@ -39,6 +39,8 @@ type BillboardFormValues = z.infer<typeof formSchema>;
 export const BillboardForm = ({ initialData }: BillboardFormProps) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const { toast } = useToast();
 
   const params = useParams();
   const router = useRouter();
@@ -71,9 +73,14 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
       }
       router.push(`/${params.storeId}/billboards`);
       router.refresh();
-      toast.success(toastMessage);
+      toast({
+        title: toastMessage,
+      });
     } catch (error) {
-      toast.error("Somthing went wrong...");
+      toast({
+        variant: "destructive",
+        title: "Somthing went wrong...",
+      });
     } finally {
       setLoading(false);
     }
@@ -87,9 +94,14 @@ export const BillboardForm = ({ initialData }: BillboardFormProps) => {
       );
       router.push(`/${params.storeId}/billboards`);
       router.refresh(); // ?
-      toast.success("Billboard Deleted!");
+      toast({
+        title: "Billboard Deleted.",
+      });
     } catch {
-      toast.error("Make sure you removed categories using this billboard.");
+      toast({
+        variant: "destructive",
+        title: "Make sure you removed categories using this billboard.",
+      });
     } finally {
       setLoading(false);
       setOpen(false);

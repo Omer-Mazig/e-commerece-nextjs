@@ -3,7 +3,7 @@ import { format } from "date-fns";
 import prismadb from "@/lib/prismadb";
 
 import { ColorClomun } from "./_components/columns";
-import { ColorsClient } from "./_components/sizes-client";
+import { ColorsClient } from "./_components/colors-client";
 
 export default async function ColorsPage({
   params,
@@ -19,7 +19,7 @@ export default async function ColorsPage({
     },
   });
 
-  const formattedColors: ColorClomun[] = colors.map(color => ({
+  const formattedColors: ColorClomun[] = colors.map((color) => ({
     id: color.id,
     name: color.name,
     value: color.value,

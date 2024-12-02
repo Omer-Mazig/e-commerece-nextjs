@@ -4,7 +4,6 @@ import { useParams, usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Dock, Settings2 } from "lucide-react";
 
 export const MainNav = ({
   className,
@@ -48,7 +47,7 @@ export const MainNav = ({
 
   return (
     <nav className={cn("flex items-center space-x-4 lg:space-x-6", className)}>
-      {routes.map(route => {
+      {routes.map((route) => {
         return (
           <Link
             key={route.href}
